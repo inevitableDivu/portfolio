@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type TextProps = React.PropsWithChildren<{
 	href?: string;
@@ -19,9 +20,9 @@ function Text({ children, href }: TextProps) {
 		// @ts-ignore
 		<item.component
 			{...item.props}
-			className={`font-semibold text-stone-700 ${
-				href ? "uppercase px-1.5 py-0.5 bg-gray-300 rounded-lg" : ""
-			}`}
+			className={cn("font-semibold text-sm text-stone-700 dark:text-purple-500", {
+				"uppercase px-1.5 py-0.5 bg-gray-300 dark:bg-gray-700 rounded-lg": !!href,
+			})}
 		>
 			{children}
 		</item.component>

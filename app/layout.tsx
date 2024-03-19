@@ -1,10 +1,10 @@
-import { BackgroundBeams } from "@/components/background-beams";
 import MouseTracker from "@/components/mouse-tracker";
+import Navbar from "@/components/navbar";
+import { background, styles } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
 
 const poppins = Poppins({
 	weight: ["400", "500", "600", "700"],
@@ -14,7 +14,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
 	title: {
-		default: "Divyansh Pandey",
+		default: "Home | Divyansh Pandey",
 		template: "%s | Divyansh Pandey",
 	},
 };
@@ -24,6 +24,8 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const Background = background[styles.background];
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
@@ -34,10 +36,16 @@ export default function RootLayout({
 				)}
 				suppressHydrationWarning
 			>
-				<MouseTracker />
-				<BackgroundBeams />
-
-				<div className="fixed inset-0 z-50 p-4 sm:p-8 md:p-10 max-h-full overflow-y-auto">
+				{styles.background === "boxes" && (
+					<div className="absolute inset-0 w-full h-full bg-slate-600/50 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+				)}
+				{styles.cursor && styles.background !== "boxes" && <MouseTracker />}
+				<Background />
+				<div
+					className={cn("p-4 sm:p-8 md:p-10 max-h-full overflow-y-auto", {
+						"fixed inset-0 z-10": styles.background === "beam",
+					})}
+				>
 					<div className="max-h-full inset-y-0 max-w-6xl mx-auto">
 						<Navbar />
 						{children}

@@ -146,11 +146,11 @@ const Cursor = () => {
 		<CursorStyle className="hidden md:block" cursoractive={String(mouseActive)}>
 			<div
 				ref={dotOutline}
-				className="cursor-dot-outline border border-neutral-300 shadow h-20 aspect-square rounded-full opacity-0"
+				className="cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0"
 			></div>
 			<div
 				ref={dot}
-				className="cursor-dot bg-gray-300 shadow h-2 aspect-square rounded-full opacity-0"
+				className="cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0"
 			></div>
 		</CursorStyle>
 	);
