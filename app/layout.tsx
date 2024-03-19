@@ -42,7 +42,7 @@ export default function RootLayout({
 				{styles.cursor && styles.background !== "boxes" && <MouseTracker />}
 				<Background />
 				<div
-					className={cn("p-4 sm:p-8 md:p-10 max-h-full overflow-y-auto", {
+					className={cn("p-5 sm:p-8 md:p-10 max-h-full overflow-y-auto", {
 						"fixed inset-0 z-10": styles.background === "beam",
 					})}
 				>

@@ -17,7 +17,7 @@ const navigations = [
 
 function Navbar() {
 	return (
-		<nav className="flex items-center justify-between py-6 px-5">
+		<nav className="flex items-center justify-between py-3 md:py-6 lg:px-5">
 			<div className="z-10">
 				<Logo className="h-16 w-16 text-black dark:text-white" />
 			</div>
