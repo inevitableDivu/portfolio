@@ -1,7 +1,6 @@
-import React from "react";
-import { ArrowUp, GithubIcon, Instagram, Mail, Linkedin, Twitter } from "lucide-react";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { GithubIcon, Instagram, Linkedin, Mail, Twitter } from "lucide-react";
+import Link from "next/link";
 
 const socials = {
 	github: GithubIcon,
