@@ -75,18 +75,16 @@
   }
 }
 
-@media (min-width: 768px) {
-  ::-webkit-scrollbar {
-      @apply w-2;
-    }
-  
-    ::-webkit-scrollbar-thumb {
-      @apply bg-gray-600;
-    }
-  
-    ::-webkit-scrollbar-track {
-      @apply bg-gray-300;
-    }
+::-webkit-scrollbar {
+  @apply w-2 hidden md:block;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-300 rounded-full;
 }
 
 *::selection {

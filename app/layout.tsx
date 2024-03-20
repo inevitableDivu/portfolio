@@ -37,12 +37,12 @@ export default function RootLayout({
 				suppressHydrationWarning
 			>
 				{styles.background === "boxes" && (
-					<div className="absolute inset-0 w-full h-full bg-slate-600/50 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+					<div className="absolute inset-0 w-full h-full bg-slate-600/50 z-20 [mask-image:radial-gradient(transparent,white)] dark:[mask-image:radial-gradient(transparent,black)] pointer-events-none" />
 				)}
 				{styles.cursor && styles.background !== "boxes" && <MouseTracker />}
 				<Background />
 				<div
-					className={cn("p-5 sm:p-8 md:p-10 max-h-full overflow-y-auto", {
+					className={cn("p-4 sm:p-5 max-h-full overflow-y-auto h-full", {
 						"fixed inset-0 z-10": styles.background === "beam",
 					})}
 				>

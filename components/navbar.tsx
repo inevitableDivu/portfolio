@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import { motion, useCycle } from "framer-motion";
 import { MoonIcon, SunIcon } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useSyncExternalStore } from "react";
+import CustomLink from "./link";
 
 const navigations = [
 	{ name: "Home", href: "/" },
@@ -17,19 +18,18 @@ const navigations = [
 
 function Navbar() {
 	return (
-		<nav className="flex items-center justify-between py-3 md:py-6 lg:px-5">
+		<nav className="flex items-center justify-between lg:px-5 p-0 sm:pt-6 md:py-10 sm:max-w-xl mx-auto md:max-w-none transition-all duration-150">
 			<div className="z-10">
-				<Logo className="h-16 w-16 text-black dark:text-white" />
+				<Link href="/">
+					<Logo className="h-10 w-10 text-black dark:text-white" />
+				</Link>{" "}
 			</div>
 			<div className="hidden md:flex">
-				<ul className="flex gap-2">
+				<ul className="flex gap-2 items-center">
 					{navigations.map((nav) => (
-						<Link href={nav.href} key={nav.name}>
-							<li className="text-xs xl:text-sm px-4 py-3 relative group font-medium text-stone-600 dark:text-stone-300">
-								{nav.name}
-								<div className="absolute origin-center h-0.5 bg-stone-500 dark:bg-stone-400 w-0 group-hover:w-full transition-all duration-[400ms] bottom-0 inset-x-0 mx-auto" />
-							</li>
-						</Link>
+						<CustomLink href={nav.href} key={nav.name} className="px-4 py-3">
+							{nav.name}
+						</CustomLink>
 					))}
 
 					<ThemeButton />
@@ -49,6 +49,7 @@ const ThemeButton = () => {
 		if (isDark) {
 			document.documentElement.classList.add("dark");
 			localStorage.theme = "dark";
+			toggleTheme(1);
 		} else {
 			document.documentElement.classList.remove("dark");
 			localStorage.theme = "light";
@@ -65,10 +66,7 @@ const ThemeButton = () => {
 	return (
 		<button
 			onClick={() => toggleTheme()}
-			className={cn("h-8 w-8 rounded-full overflow-hidden", {
-				"text-white": isDark,
-				"text-black": !isDark,
-			})}
+			className={cn("h-8 w-8 rounded-full overflow-hidden text-black dark:text-white")}
 		>
 			<motion.div className="h-full" animate={{ translateY: isDark ? "-100%" : "0%" }}>
 				<div className="h-full flex items-center justify-center">
