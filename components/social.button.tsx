@@ -18,6 +18,7 @@ function SocialButtons() {
 				const Icon = socials[key as keyof typeof socials];
 				return (
 					<Link
+						key={key}
 						href={"#"}
 						className={cn(
 							"flex-1 sm:flex-none flex items-center justify-center sm:text-stone-800 dark:sm:text-stone-200 group",
