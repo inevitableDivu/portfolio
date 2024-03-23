@@ -20,7 +20,7 @@ function SocialButtons() {
 						key={key}
 						href={"#"}
 						className={cn(
-							"flex-1 sm:flex-none flex items-center justify-center sm:text-stone-800 dark:sm:text-stone-200 group",
+							"flex-1 sm:flex-none flex items-center justify-center sm:text-slate-800 dark:sm:text-slate-200 group",
 							{
 								"border-r-2 border-zinc-500/20 sm:border-none":
 									index !== Object.keys(socials).length - 1,

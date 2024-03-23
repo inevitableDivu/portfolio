@@ -11,7 +11,7 @@ function Home() {
 		<Wrapper>
 			<h1
 				className={cn(
-					"uppercase font-semibold text-4xl tracking-widest text-stone-900 dark:text-stone-200 mt-8 mb-6",
+					"uppercase font-semibold text-4xl tracking-widest text-slate-900 dark:text-slate-200 mt-8 mb-6",
 					beamStyle
 				)}
 			>

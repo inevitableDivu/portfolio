@@ -89,17 +89,17 @@
 }
 
 *::selection {
-    @apply bg-stone-500 text-stone-100 dark:bg-gray-100 dark:text-gray-800;
+    @apply bg-slate-500 text-slate-100 dark:bg-gray-100 dark:text-gray-800;
 }
 
 *::-moz-selection {
-    @apply bg-stone-300;
+    @apply bg-slate-300;
 }
 
 *::-webkit-selection {
-    @apply bg-stone-300;
+    @apply bg-slate-300;
 }
 
 *::-ms-selection {
-    @apply bg-stone-300;
+    @apply bg-slate-300;
 }

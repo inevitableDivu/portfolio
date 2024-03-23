@@ -20,7 +20,7 @@ function Text({ children, href }: TextProps) {
 		// @ts-ignore
 		<item.component
 			{...item.props}
-			className={cn("font-semibold text-sm text-stone-700 dark:text-purple-500", {
+			className={cn("font-semibold text-sm text-slate-700 dark:text-purple-500", {
 				"uppercase px-1.5 py-0.5 bg-gray-300 dark:bg-gray-700 rounded-lg": !!href,
 			})}
 		>
