@@ -9,31 +9,18 @@ export default function BackgroundBoxes({ className, ...rest }: { className?: st
 	const rows = useMemo(() => new Array(100).fill(1), []);
 	const cols = useMemo(() => new Array(80).fill(1), []);
 	let colors = useMemo(
-		() =>
-			localStorage.theme === "dark"
-				? [
-						"--sky-400",
-						"--pink-400",
-						"--green-400",
-						"--yellow-400",
-						"--red-400",
-						"--purple-400",
-						"--blue-400",
-						"--indigo-400",
-						"--violet-400",
-				  ]
-				: [
-						"--sky-300",
-						"--pink-300",
-						"--green-300",
-						"--yellow-300",
-						"--red-300",
-						"--purple-300",
-						"--blue-300",
-						"--indigo-300",
-						"--violet-300",
-				  ],
-		[localStorage.theme]
+		() => [
+			"--sky-300",
+			"--pink-300",
+			"--green-300",
+			"--yellow-300",
+			"--red-300",
+			"--purple-300",
+			"--blue-300",
+			"--indigo-300",
+			"--violet-300",
+		],
+		[]
 	);
 
 	const getRandomColor = useCallback(() => {

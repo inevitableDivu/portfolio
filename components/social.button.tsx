@@ -12,7 +12,7 @@ const socials = {
 
 function SocialButtons() {
 	return (
-		<div className="fixed inset-x-0 bottom-0 sm:relative sm:bg-transparent backdrop-blur-md p-5 sm:p-0 flex items-center justify-around sm:justify-start sm:gap-8 z-50 sm:z-20">
+		<div className="fixed inset-x-0 bottom-0 sm:relative sm:bg-transparent backdrop-blur-md md:backdrop-blur-none p-5 sm:p-0 flex items-center justify-around sm:justify-start sm:gap-8 z-50 sm:z-20">
 			{Object.keys(socials).map((key, index) => {
 				const Icon = socials[key as keyof typeof socials];
 				return (

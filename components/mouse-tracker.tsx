@@ -8,11 +8,7 @@ import { css, styled } from "styled-components";
 
 /* -------------------------- Internal Dependencies ------------------------- */
 import { useIsMounted } from "@/hooks";
-
-// Define Props type for CursorStyle component
-interface CursorStyleProps {
-	cursoractive: string;
-}
+import { cn } from "@/lib/utils";
 
 // Define a type for the Event used in mouse events
 type MouseEvent = globalThis.MouseEvent;
@@ -142,70 +138,34 @@ const Cursor = () => {
 		animateDotOutline,
 	]);
 
+	useEffect(() => {
+		if (mouseActive && dotOutline.current) {
+			dotOutline.current.style.opacity = "0";
+		}
+	}, [mouseActive, dotOutline]);
+
 	return (
-		<CursorStyle className="hidden md:block" cursoractive={String(mouseActive)}>
+		<>
 			<div
 				ref={dotOutline}
-				className="cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0"
+				className={cn(
+					"cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute transition-[height,opacity] duration-300",
+					{
+						"h-4 !opacity-0": mouseActive,
+					}
+				)}
 			></div>
 			<div
 				ref={dot}
-				className="cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0"
+				className={cn(
+					"cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute border-0 border-white/40 border-spacing-2 p-0 transition-[border,padding] duration-150",
+					{
+						"border-4 p-1 bg-gray-400/40": mouseActive,
+					}
+				)}
 			></div>
-		</CursorStyle>
+		</>
 	);
 };
-
-const CursorStyle = styled.div<CursorStyleProps>`
-	.cursor-dot,
-	.cursor-dot-outline {
-		display: none;
-	}
-
-	@media (min-width: 768px) {
-		.cursor-dot,
-		.cursor-dot-outline {
-			display: block;
-			pointer-events: none;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			z-index: 9222;
-			transform: translate(-50%, -50%);
-		}
-
-		.cursor-dot {
-			transition: opacity 0.2s ease-in-out, transform 0.4s ease-in-out;
-		}
-
-		.cursor-dot-outline {
-			transition: opacity 0.2s ease-in-out, transform 0.8s ease-in 0.1s;
-		}
-
-		${({ cursoractive }) =>
-			cursoractive === "true"
-				? css`
-						.cursor-dot {
-							transform: translate(-50%, -50%) scale(2.2);
-							background: hsla(0, 0%, 100%, 0.3);
-							border: 1px solid #fff;
-						}
-
-						.cursor-dot-outline {
-							box-shadow: none;
-							transform: translate(-50%, -50%) scale(0);
-							transition-duration: 1s;
-						}
-				  `
-				: css`
-						.cursor-dot {
-							transform: translate(-50%, -50%) scale(1);
-						}
-						.cursor-dot-outline {
-							transform: translate(-50%, -50%) scale(1);
-						}
-				  `}
-	}
-`;
 
 export default Cursor;

@@ -20,7 +20,7 @@ export const profile = {
 	title: "Your Friendly Neighborhood Digital Craftsman: Building Apps with Beats of Code",
 	about: [
 		`Consider yourself in the presence of your friendly neighborhood digital craftsman – a %PROFESSION% extraordinaire! I wield JavaScript like a digital sculptor, crafting websites and mobile apps that bring your ideas to life in interactive wonderlands.`,
-		`When I step away from the keyboard, the world pulsates with a vibrant symphony. Classic favorites find perfect harmony with modern pop anthems, creating a soundtrack that's as unique as my coding approach. It's a fusion of the tried-and-true with the fresh and innovative, much like the apps I build. While I haven't yet built my library of written knowledge, my passion for sharing extends to web development discussions, brainstorming sessions for mobile apps, or simply diving deep into the latest musical discoveries. Let's connect and collaborate on transforming those sparks of imagination into digital masterpieces!`,
+		`Like my code, my taste in music blends classics with modern beats. This fuels my passion for crafting unique apps and sparking discussions on web & mobile development. While I'm new to writing, I bring enthusiasm to brainstorm sessions and musical discoveries. Let's turn creative ideas into digital symphonies!`,
 	],
 };
 

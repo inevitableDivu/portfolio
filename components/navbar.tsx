@@ -3,34 +3,46 @@
 import Logo from "@/assets/logo";
 import { useDimensions } from "@/hooks";
 import { cn } from "@/lib/utils";
-import { motion, useCycle } from "framer-motion";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { MoonIcon, SunIcon } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import CustomLink from "./link";
 
-const navigations = [
-	{ name: "Home", href: "/" },
-	{ name: "About", href: "/about" },
-	{ name: "Projects", href: "/projects" },
-	{ name: "Contact", href: "/contact" },
-];
+export const navigation = {
+	"/": { name: "Home", href: "/" },
+	"/about": { name: "About", href: "/about" },
+	"/projects": { name: "Projects", href: "/projects" },
+	"/contact": { name: "Contact", href: "/contact" },
+};
 
 function Navbar() {
+	const pathname = usePathname();
 	return (
 		<nav className="flex items-center justify-between lg:px-5 p-0 sm:pt-6 md:py-10 sm:max-w-xl mx-auto md:max-w-none transition-all duration-150">
 			<div className="z-10">
-				<Link href="/">
+				<Link href="/" className={pathname === "/" ? "pointer-events-none" : ""}>
 					<Logo className="h-10 w-10 text-black dark:text-white" />
-				</Link>{" "}
+				</Link>
 			</div>
 			<div className="hidden md:flex">
-				<ul className="flex gap-2 items-center">
-					{navigations.map((nav) => (
-						<CustomLink href={nav.href} key={nav.name} className="px-4 py-3">
-							{nav.name}
-						</CustomLink>
-					))}
+				<ul className="flex gap-2 items-center" id="cardHover">
+					<AnimatePresence mode="wait">
+						{Object.values(navigation).map((nav) =>
+							nav.href !== "/" ? (
+								<CustomLink
+									key={nav.href}
+									href={nav.href}
+									className={cn("px-4 py-3", {
+										hidden: pathname === nav.href,
+									})}
+								>
+									{nav.name}
+								</CustomLink>
+							) : null
+						)}
+					</AnimatePresence>
 
 					<ThemeButton />
 				</ul>
@@ -44,8 +56,14 @@ function Navbar() {
 
 const ThemeButton = () => {
 	const [isDark, toggleTheme] = useCycle(false, true);
+	const ref = useRef<boolean>(true);
 
 	useEffect(() => {
+		if (ref.current) {
+			ref.current = false;
+			return;
+		}
+
 		if (isDark) {
 			document.documentElement.classList.add("dark");
 			localStorage.theme = "dark";
@@ -54,9 +72,9 @@ const ThemeButton = () => {
 			document.documentElement.classList.remove("dark");
 			localStorage.theme = "light";
 		}
-	}, [isDark]);
+	}, [isDark, ref]);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		let theme = localStorage.theme;
 		if (theme === "dark") {
 			toggleTheme(1);

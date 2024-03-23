@@ -10,7 +10,7 @@ function formatAbout(paragraph: string): (JSX.Element | string)[] {
 		user.profession.forEach((title, index) => {
 			let isLastIndex = index === user.profession.length - 1;
 			if (isLastIndex) profession.push("and ");
-			profession.push(<Text>{title}</Text>);
+			profession.push(<Text key={Math.random()}>{title}</Text>);
 			if (!isLastIndex) profession.push(", ");
 		});
 		let updatedPara = paragraph.split("%PROFESSION%");
