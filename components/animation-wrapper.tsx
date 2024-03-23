@@ -64,7 +64,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			}}
 		>
 			<motion.p
-				className="fixed inset-0 text-white flex items-center justify-center z-[999999]"
+				className="fixed inset-0 text-white flex items-center justify-center z-[999999] text-xl lg:text-3xl font-semibold"
 				{...anim(text)}
 			>
 				<span className="mx-auto my-auto">
