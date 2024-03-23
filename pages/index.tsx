@@ -1,3 +1,4 @@
+import Wrapper from "@/components/animation-wrapper";
 import CustomLink from "@/components/link";
 import SocialButtons from "@/components/social.button";
 import { beamStyle, profile, user } from "@/constants/data";
@@ -7,7 +8,7 @@ import { ArrowUp } from "lucide-react";
 
 function Home() {
 	return (
-		<div className="max-w-2xl sm:max-w-xl lg:max-w-4xl xl:max-w-5xl mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0">
+		<Wrapper>
 			<h1
 				className={cn(
 					"uppercase font-semibold text-4xl tracking-widest text-stone-900 dark:text-stone-200 mt-8 mb-6",
@@ -21,7 +22,7 @@ function Home() {
 					<p
 						key={index}
 						className={cn(
-							"text-xs font-medium dark:font-normal md:text-sm leading-[2.5] md:leading-loose lg:leading-[2.5] tracking-wide z-20",
+							"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-20",
 							beamStyle
 						)}
 					>
@@ -45,8 +46,9 @@ function Home() {
 				</div>
 			</div>
 			<br className="hidden md:block" />
+			<br className="hidden md:block" />
 			<SocialButtons />
-		</div>
+		</Wrapper>
 	);
 }
 
