@@ -18,17 +18,28 @@ function Home() {
 				I&apos;m {user.name}
 			</h1>
 			<div className="space-y-3 flex flex-col">
-				{profile.about.map((para, index) => (
+				{Array.isArray(profile.about) ? (
+					profile.about.map((para, index) => (
+						<p
+							key={index}
+							className={cn(
+								"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-20",
+								beamStyle
+							)}
+						>
+							{formatAbout(para)}
+						</p>
+					))
+				) : (
 					<p
-						key={index}
 						className={cn(
 							"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-20",
 							beamStyle
 						)}
 					>
-						{formatAbout(para)}
+						{formatAbout(String(profile.about))}
 					</p>
-				))}
+				)}
 			</div>
 			<br className="hidden md:block" />
 			<div className="my-3 md:my-0">
