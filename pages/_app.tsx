@@ -2,12 +2,13 @@ import MouseTracker from "@/components/mouse-tracker";
 import Navbar from "@/components/navbar";
 import { background, styles } from "@/constants/data";
 import { cn } from "@/lib/utils";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { GetStaticPropsResult } from "next";
 import type { AppProps } from "next/app";
 import { Poppins } from "next/font/google";
 
 import "@/styles/globals.css";
+import { useState } from "react";
 
 const poppins = Poppins({
 	weight: ["400", "500", "600", "700"],
@@ -38,7 +39,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
 				>
 					{styles.cursor && styles.background !== "boxes" && <MouseTracker />}
 
-					<Navbar />
+					<Navbar onLoad={() => {}} />
+
 					<AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
 						<Component key={router.route} {...pageProps} />
 					</AnimatePresence>
@@ -46,10 +48,4 @@ export default function App({ Component, pageProps, router }: AppProps) {
 			</div>
 		</>
 	);
-}
-
-export function getStaticProps(): GetStaticPropsResult<{}> {
-	return {
-		props: {},
-	};
 }

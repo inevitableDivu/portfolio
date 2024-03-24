@@ -1,4 +1,5 @@
 import Wrapper from "@/components/animation-wrapper";
+import Heading from "@/components/heading";
 import CustomLink from "@/components/link";
 import SocialButtons from "@/components/social.button";
 import { beamStyle, profile, user } from "@/constants/data";
@@ -9,14 +10,7 @@ import { ArrowUp } from "lucide-react";
 function Home() {
 	return (
 		<Wrapper>
-			<h1
-				className={cn(
-					"uppercase font-semibold text-4xl tracking-widest text-slate-900 dark:text-slate-200 mt-8 mb-6",
-					beamStyle
-				)}
-			>
-				I&apos;m {user.name}
-			</h1>
+			<Heading>I&apos;m {user.name}</Heading>
 			<div className="space-y-3 flex flex-col">
 				{Array.isArray(profile.about) ? (
 					profile.about.map((para, index) => (

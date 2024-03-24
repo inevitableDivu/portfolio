@@ -17,7 +17,11 @@ export const navigation = {
 	"/contact": { name: "Contact", href: "/contact" },
 };
 
-function Navbar() {
+type ThemeProp = {
+	onLoad(loaded: boolean): void;
+};
+
+function Navbar({ onLoad }: ThemeProp) {
 	const pathname = usePathname();
 	return (
 		<nav className="flex items-center justify-between lg:px-5 p-0 sm:pt-6 md:py-10 sm:max-w-xl mx-auto md:max-w-none transition-all duration-150">
@@ -44,17 +48,17 @@ function Navbar() {
 						)}
 					</AnimatePresence>
 
-					<ThemeButton />
+					<ThemeButton {...{ onLoad }} />
 				</ul>
 			</div>
 			<div className="md:hidden">
-				<ThemeButton />
+				<ThemeButton {...{ onLoad }} />
 			</div>
 		</nav>
 	);
 }
 
-const ThemeButton = () => {
+const ThemeButton = (props: ThemeProp) => {
 	const [isDark, toggleTheme] = useCycle(false, true);
 	const ref = useRef<boolean>(true);
 
@@ -64,6 +68,7 @@ const ThemeButton = () => {
 			return;
 		}
 
+		props.onLoad(true);
 		if (isDark) {
 			document.documentElement.classList.add("dark");
 			localStorage.theme = "dark";
@@ -78,6 +83,8 @@ const ThemeButton = () => {
 		let theme = localStorage.theme;
 		if (theme === "dark") {
 			toggleTheme(1);
+		} else {
+			props.onLoad(true);
 		}
 	}, []);
 

@@ -149,18 +149,19 @@ const Cursor = () => {
 			<div
 				ref={dotOutline}
 				className={cn(
-					"cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute transition-[height,opacity] duration-300",
+					"cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute transition-transform duration-300",
 					{
-						"h-4 !opacity-0": mouseActive,
+						"scale-0": mouseActive,
 					}
 				)}
 			></div>
 			<div
 				ref={dot}
 				className={cn(
-					"cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute border-0 border-white/40 border-spacing-2 p-0 transition-[border,padding] duration-150",
+					"cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute border-0 border-white border-spacing-2 p-0 transition-[border,padding,height] duration-150",
 					{
-						"border-4 p-1 bg-gray-400/40": mouseActive,
+						"border p-1 bg-gray-400/40 scale-150 -translate-y-1/2 -translate-x-1/2":
+							mouseActive,
 					}
 				)}
 			></div>
