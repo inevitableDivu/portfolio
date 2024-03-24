@@ -32,7 +32,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 			>
 				<div
 					className={cn(
-						"max-h-full inset-y-0 max-w-6xl mx-auto overflow-x-hidden sm:overflow-y-hidden",
+						"max-h-full inset-y-0 max-w-6xl mx-auto overflow-x-hidden pb-2",
 						poppins.className
 					)}
 				>

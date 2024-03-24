@@ -13,7 +13,6 @@ export const socialNetworks = {
 	instagram: "divu_inevitable_0_o",
 	linkedin: "divyansh-pandey-8b0981181",
 	twitter: "inevitableDivu7",
-	facebook: "#",
 };
 
 export const profile = {
