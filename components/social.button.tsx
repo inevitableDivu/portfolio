@@ -28,7 +28,7 @@ const socials: Record<keyof typeof socialNetworks, { url: string; icon: LucideIc
 
 function SocialButtons() {
 	return (
-		<div className="fixed inset-x-0 bottom-0 sm:relative sm:bg-transparent backdrop-blur-md md:backdrop-blur-none p-5 sm:p-0 flex items-center justify-around sm:justify-start sm:gap-8 z-50 sm:z-20">
+		<div className="fixed inset-x-0 bottom-0 sm:relative sm:bg-transparent backdrop-blur-md md:backdrop-blur-none p-5 sm:p-0 flex items-center justify-around sm:justify-start sm:gap-8 z-10 sm:z-20">
 			{Object.keys(socials).map((key, index) => {
 				let value = key as keyof typeof socialNetworks;
 				const Icon = socials[value];
@@ -48,7 +48,7 @@ function SocialButtons() {
 							}
 						)}
 					>
-						<Icon.icon className="h-5 w-5 group-hover:scale-125 transition-all duration-300" />
+						<Icon.icon className="h-5 w-5 group-hover:scale-125 group-hover:text-theme-purple group-hover:animate-pulse transition-all duration-300" />
 					</Link>
 				);
 			})}

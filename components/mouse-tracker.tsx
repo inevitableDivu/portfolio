@@ -85,8 +85,9 @@ const Cursor = () => {
 			cursorVisible.current = true;
 			toggleCursorVisibility();
 
-			endX.current = e.pageX;
-			endY.current = e.pageY;
+			endX.current = e.clientX;
+			endY.current = e.clientY;
+			console.log(e);
 			if (dot?.current) {
 				dot.current.style.top = endY.current + "px";
 				dot.current.style.left = endX.current + "px";
@@ -149,7 +150,7 @@ const Cursor = () => {
 			<div
 				ref={dotOutline}
 				className={cn(
-					"cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute transition-transform duration-300",
+					"cursor-dot-outline border border-neutral-400 shadow h-20 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none fixed transition-transform duration-300",
 					{
 						"scale-0": mouseActive,
 					}
@@ -158,7 +159,7 @@ const Cursor = () => {
 			<div
 				ref={dot}
 				className={cn(
-					"cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute border-0 border-white border-spacing-2 p-0 transition-[border,padding,height] duration-150",
+					"cursor-dot bg-gray-400 shadow h-2 aspect-square rounded-full opacity-0 hidden md:block z-[9992] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none fixed border-0 border-white border-spacing-2 p-0 transition-[border,padding,height] duration-150",
 					{
 						"border p-1 bg-gray-400/40 scale-150 -translate-y-1/2 -translate-x-1/2":
 							mouseActive,

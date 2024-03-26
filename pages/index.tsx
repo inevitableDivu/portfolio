@@ -17,7 +17,7 @@ function Home() {
 						<p
 							key={index}
 							className={cn(
-								"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-20",
+								"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-10",
 								beamStyle
 							)}
 						>
@@ -27,7 +27,7 @@ function Home() {
 				) : (
 					<p
 						className={cn(
-							"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-20",
+							"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-10",
 							beamStyle
 						)}
 					>

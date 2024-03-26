@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 // Naive implementation - in reality would want to attach
 // a window or resize listener. Also use state/layoutEffect instead of ref/effect
@@ -10,11 +10,14 @@ export const useDimensions = () => {
 		height: 0,
 	});
 
-	useLayoutEffect(() => {
-		setDimensions({ width: window.innerWidth, height: window.innerHeight });
-		window.addEventListener("resize", () => {
+	useEffect(() => {
+		const resize = () => {
 			setDimensions({ width: window.innerWidth, height: window.innerHeight });
-		});
+		};
+		window.addEventListener("resize", resize);
+		resize();
+
+		return () => window.removeEventListener("resize", resize);
 	}, []);
 
 	return dimensions;

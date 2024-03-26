@@ -6,7 +6,7 @@ export default function DocumentMain() {
 		<Html lang="en">
 			<Head />
 			<body
-				className={cn("bg-background antialiased overflow-hidden fixed inset-0")}
+				className={cn("bg-background antialiased fixed inset-0")}
 				suppressHydrationWarning
 			>
 				<Main />

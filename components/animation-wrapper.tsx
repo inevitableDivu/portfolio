@@ -73,6 +73,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			</motion.p>
 			{dimensions.width < 1 && (
 				<motion.div
+					id="curve_overlay"
 					initial={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					className="fixed bg-slate-900 inset-0 z-[999999]"
@@ -81,7 +82,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			{dimensions.width > 0 && (
 				<motion.svg
 					{...anim(translate(dimensions.width > 768 ? CURVE_INDEX : 150))}
-					className="fixed left-0 w-screen pointer-events-none z-[99999] text-slate-900"
+					className="fixed left-0 w-screen pointer-events-none z-[999997] text-slate-900"
 					style={{
 						height: `calc(100vh + ${
 							(dimensions.width > 768 ? CURVE_INDEX : 150) * 2
@@ -90,8 +91,8 @@ function Wrapper({ children }: React.PropsWithChildren) {
 					}}
 				>
 					<motion.path
+						id="curve_svg"
 						{...anim(curve(paths.initialPath, paths.targetPath))}
-						// d={paths.initialPath}
 						fill="currentColor"
 					/>
 				</motion.svg>

@@ -2,13 +2,11 @@ import MouseTracker from "@/components/mouse-tracker";
 import Navbar from "@/components/navbar";
 import { background, styles } from "@/constants/data";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
-import { GetStaticPropsResult } from "next";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { Poppins } from "next/font/google";
 
 import "@/styles/globals.css";
-import { useState } from "react";
 
 const poppins = Poppins({
 	weight: ["400", "500", "600", "700"],
@@ -27,21 +25,27 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
 			<Background />
 			<div
+				id="content_container"
 				className={cn("p-4 sm:p-5 max-h-full overflow-y-auto overflow-x-hidden h-full", {
 					"fixed inset-0 z-10": styles.background === "beam",
 				})}
 			>
+				{styles.cursor && styles.background !== "boxes" && <MouseTracker />}
+
 				<div
 					className={cn(
-						"max-h-full inset-y-0 max-w-6xl mx-auto overflow-x-hidden pb-2",
+						"max-h-full h-full inset-y-0 max-w-6xl mx-auto pb-2",
 						poppins.className
 					)}
 				>
-					{styles.cursor && styles.background !== "boxes" && <MouseTracker />}
-
 					<Navbar onLoad={() => {}} />
 
-					<AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+					<AnimatePresence
+						mode="wait"
+						onExitComplete={() => {
+							window.scrollTo(0, 0);
+						}}
+					>
 						<Component key={router.route} {...pageProps} />
 					</AnimatePresence>
 				</div>
