@@ -40,7 +40,7 @@ function Navbar({ onLoad }: ThemeProp) {
 								<CustomLink
 									key={nav.href}
 									href={nav.href}
-									className={cn("px-4 py-3", {
+									className={cn("px-4 py-3 hidden", {
 										hidden: pathname === nav.href,
 									})}
 								>
@@ -164,7 +164,7 @@ export const Sidebar = () => {
 
 	return (
 		<>
-			<div className="relative z-[99] flex">
+			<div className="relative z-[99] hidden">
 				<motion.div
 					variants={sidebar}
 					custom={{ height, width }}
