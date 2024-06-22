@@ -36,7 +36,7 @@ function Home() {
 				)}
 			</div>
 			<br className="hidden md:block" />
-			<div className="my-3 md:my-0">
+			<div className="my-3 md:my-0 hidden">
 				<div className="flex items-center gap-3">
 					<CustomLink
 						href="/about"
