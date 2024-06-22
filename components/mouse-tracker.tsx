@@ -87,7 +87,6 @@ const Cursor = () => {
 
 			endX.current = e.clientX;
 			endY.current = e.clientY;
-			console.log(e);
 			if (dot?.current) {
 				dot.current.style.top = endY.current + "px";
 				dot.current.style.left = endX.current + "px";

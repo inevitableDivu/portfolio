@@ -28,8 +28,10 @@ type SiteStyle = {
 	cursor: boolean;
 };
 
+const backgroundsArr: SiteStyle["background"][] = ["beam", "boxes"];
+
 export const styles: SiteStyle = {
-	background: "beam",
+	background: backgroundsArr[Math.floor(Math.random() * backgroundsArr.length)],
 	cursor: true,
 };
 
