@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useEffect, useState, use } from "react";
+import { PropsWithChildren, createContext, useEffect, useState, useContext } from "react";
 
 type IThemes = "dark" | "light" | "system";
 
@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function useTheme() {
-	return use(ThemeContext);
+	return useContext(ThemeContext);
 }
 
 export default function ThemeProvider({ children }: PropsWithChildren) {

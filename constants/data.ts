@@ -4,7 +4,7 @@ import BackgroundBoxes from "@/components/background-boxes";
 export const user = {
 	name: "Divyansh Pandey",
 	nameInitials: "dp",
-	profession: ["Full Stack Developer", "JavaScript Guru", "Mobile App Developer"],
+	profession: ["Full Stack Software Engineer", "Mobile App Developer"],
 };
 
 export const socialNetworks = {

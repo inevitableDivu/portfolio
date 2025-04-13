@@ -13,19 +13,19 @@ function About() {
 					<Container.Title>Stats</Container.Title>
 					<Container.Body className="flex gap-7">
 						<span>
-							<h1>Line of code</h1>
+							<p className="font-bold">Line of code</p>
 							<span>300K+</span>
 						</span>
 						<span>
-							<h1>Projects</h1>
+							<p className="font-bold">Projects</p>
 							<span>10+</span>
 						</span>
 						<span>
-							<h1>Experience</h1>
+							<p className="font-bold">Experience</p>
 							<span>2+</span>
 						</span>
 						<span>
-							<h1>Clients</h1>
+							<p className="font-bold">Clients</p>
 							<span>5+</span>
 						</span>
 					</Container.Body>

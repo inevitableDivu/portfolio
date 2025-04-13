@@ -32,7 +32,7 @@ const Heading = ({
 const Content = ({ children }: React.PropsWithChildren) => <div>{children}</div>;
 
 const Description = ({ children, className }: React.PropsWithChildren<{ className?: string }>) => (
-	<p className={cn("text-sm pt-3 leading-loose", className)}>{children}</p>
+	<div className={cn("text-sm pt-3 leading-loose", className)}>{children}</div>
 );
 
 Container.Title = Heading;

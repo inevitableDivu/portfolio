@@ -89,17 +89,17 @@
 }
 
 *::selection {
-    @apply bg-slate-500 text-slate-100 dark:bg-gray-100 dark:text-gray-800;
+    @apply bg-teal-600 text-slate-100 dark:bg-gray-100 dark:text-gray-800;
 }
 
 *::-moz-selection {
-    @apply bg-slate-300;
+    @apply bg-teal-600;
 }
 
 *::-webkit-selection {
-    @apply bg-slate-300;
+    @apply bg-teal-600;
 }
 
 *::-ms-selection {
-    @apply bg-slate-300;
+    @apply bg-teal-600;
 }

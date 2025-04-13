@@ -39,7 +39,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 						poppins.className
 					)}
 				>
-					<Navbar onLoad={() => {}} />
+					<Navbar />
 
 					<AnimatePresence
 						mode="wait"
