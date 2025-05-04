@@ -4,7 +4,7 @@ import BackgroundBoxes from "@/components/background-boxes";
 export const user = {
 	name: "Divyansh Pandey",
 	nameInitials: "dp",
-	profession: ["Full Stack Developer", "JavaScript Guru", "Mobile App Developer"],
+	profession: ["Full Stack Software Engineer", "Mobile App Developer"],
 };
 
 export const socialNetworks = {
@@ -28,8 +28,10 @@ type SiteStyle = {
 	cursor: boolean;
 };
 
+const backgroundsArr: SiteStyle["background"][] = ["beam", "boxes", "none"];
+
 export const styles: SiteStyle = {
-	background: "beam",
+	background: backgroundsArr[Math.floor(Math.random() * backgroundsArr.length)],
 	cursor: true,
 };
 
