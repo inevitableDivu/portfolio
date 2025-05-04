@@ -38,31 +38,26 @@ function Wrapper({ children }: React.PropsWithChildren) {
 		const { height, width } = dimensions;
 		const curve = width > 768 ? CURVE_INDEX : 150;
 		const initialPath = `
-        M0 ${curve}
-        Q${width / 2} 0 ${width} ${curve}
-        L${width} ${height + curve}
-        Q${width / 2} ${height + curve * 2} 0 ${height + curve}
-        L0 0
-    `;
+			M0 ${curve}
+			Q${width / 2} 0 ${width} ${curve}
+			L${width} ${height + curve}
+			Q${width / 2} ${height + curve * 2} 0 ${height + curve}
+			L0 0
+		`;
 
 		const targetPath = `
-        M0 ${curve}
-        Q${width / 2} 0 ${width} ${curve}
-        L${width} ${height}
-        Q${width / 2} ${height} 0 ${height}
-        L0 0
-    `;
+			M0 ${curve}
+			Q${width / 2} 0 ${width} ${curve}
+			L${width} ${height}
+			Q${width / 2} ${height} 0 ${height}
+			L0 0
+		`;
 
 		return { initialPath, targetPath };
 	}, [dimensions.height, dimensions.width]);
 
 	return (
-		<motion.div
-			className="max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0"
-			onTransitionEnd={() => {
-				console.log("ended");
-			}}
-		>
+		<div className="max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0">
 			<motion.p
 				className="fixed inset-0 text-white flex items-center justify-center z-[999999] text-xl lg:text-3xl font-semibold"
 				{...anim(text)}
@@ -99,7 +94,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			)}
 
 			{children}
-		</motion.div>
+		</div>
 	);
 }
 

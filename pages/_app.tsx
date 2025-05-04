@@ -7,6 +7,7 @@ import type { AppProps } from "next/app";
 import { Poppins } from "next/font/google";
 
 import "@/styles/globals.css";
+import ThemeProvider from "@/components/context/theme.provider";
 
 const poppins = Poppins({
 	weight: ["400", "500", "600", "700"],
@@ -18,7 +19,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 	const Background = background[styles.background];
 
 	return (
-		<>
+		<ThemeProvider>
 			{styles.background === "boxes" && (
 				<div className="absolute inset-0 w-full h-full bg-slate-600/50 z-20 [mask-image:radial-gradient(transparent,white)] dark:[mask-image:radial-gradient(transparent,black)] pointer-events-none" />
 			)}
@@ -38,7 +39,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 						poppins.className
 					)}
 				>
-					<Navbar onLoad={() => {}} />
+					<Navbar />
 
 					<AnimatePresence
 						mode="wait"
@@ -50,6 +51,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
 					</AnimatePresence>
 				</div>
 			</div>
-		</>
+		</ThemeProvider>
 	);
 }

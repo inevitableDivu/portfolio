@@ -3,7 +3,7 @@ import Heading from "@/components/heading";
 import CustomLink from "@/components/link";
 import SocialButtons from "@/components/social.button";
 import { beamStyle, profile, user } from "@/constants/data";
-import { formatAbout } from "@/lib/markdown";
+import { ABOUT_FORMAT_CONSTANTS, formatText } from "@/lib/markdown";
 import { cn } from "@/lib/utils";
 import { ArrowUp } from "lucide-react";
 
@@ -21,7 +21,7 @@ function Home() {
 								beamStyle
 							)}
 						>
-							{formatAbout(para)}
+							{formatText(para, ABOUT_FORMAT_CONSTANTS)}
 						</p>
 					))
 				) : (
@@ -31,12 +31,12 @@ function Home() {
 							beamStyle
 						)}
 					>
-						{formatAbout(String(profile.about))}
+						{formatText(String(profile.about))}
 					</p>
 				)}
 			</div>
 			<br className="hidden md:block" />
-			<div className="my-3 md:my-0 hidden">
+			<div className="my-3 md:my-5">
 				<div className="flex items-center gap-3">
 					<CustomLink
 						href="/about"

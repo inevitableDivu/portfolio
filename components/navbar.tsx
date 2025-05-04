@@ -3,27 +3,32 @@
 import Logo from "@/assets/logo";
 import { useDimensions } from "@/hooks";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, useCycle } from "framer-motion";
+import { AnimatePresence, color, motion, useCycle } from "framer-motion";
 import { MenuIcon, MoonIcon, SunIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import CustomLink from "./link";
 import { useRouter } from "next/router";
+import { useTheme } from "./context/theme.provider";
 
 export const navigation = {
 	"/": { name: "Home", href: "/" },
 	"/about": { name: "About", href: "/about" },
 	"/projects": { name: "Projects", href: "/projects" },
-	"/resume": { name: "Resume", href: "/resume" },
+	"/resume": {
+		name: "Resume",
+		href: "https://drive.google.com/file/d/16CrTWivHQH0rWxZTlo_BfVjh4XJXjKsX/view?usp=sharing",
+		target: "_blank",
+	},
 	"/contact": { name: "Contact", href: "/contact" },
 };
 
 type ThemeProp = {
-	onLoad(loaded: boolean): void;
+	color?: string;
 };
 
-function Navbar({ onLoad }: ThemeProp) {
+function Navbar() {
 	const pathname = usePathname();
 	return (
 		<nav className="flex items-center justify-between lg:px-5 p-0 sm:pt-6 md:py-10 sm:max-w-xl mx-auto md:max-w-none transition-all duration-150 z-30">
@@ -39,8 +44,8 @@ function Navbar({ onLoad }: ThemeProp) {
 							nav.href !== "/" ? (
 								<CustomLink
 									key={nav.href}
-									href={nav.href}
-									className={cn("px-4 py-3 hidden", {
+									{...nav}
+									className={cn("px-4 py-3", {
 										hidden: pathname === nav.href,
 									})}
 								>
@@ -50,7 +55,7 @@ function Navbar({ onLoad }: ThemeProp) {
 						)}
 					</AnimatePresence>
 
-					<ThemeButton {...{ onLoad }} />
+					<ThemeButton />
 				</ul>
 			</div>
 			<div className="md:hidden">
@@ -61,42 +66,29 @@ function Navbar({ onLoad }: ThemeProp) {
 }
 
 const ThemeButton = (props: ThemeProp) => {
-	const [isDark, toggleTheme] = useCycle(false, true);
 	const ref = useRef<boolean>(true);
+	const { theme, setTheme } = useTheme();
+	const isDark = theme === "dark";
 
 	useEffect(() => {
-		if (ref.current) {
-			ref.current = false;
-			return;
-		}
-
-		props.onLoad(true);
 		if (isDark) {
 			document.documentElement.classList.add("dark");
 			localStorage.theme = "dark";
-			toggleTheme(1);
 		} else {
 			document.documentElement.classList.remove("dark");
 			localStorage.theme = "light";
 		}
-	}, [isDark, ref]);
-
-	useEffect(() => {
-		let theme = localStorage.theme;
-		if (theme === "dark") {
-			toggleTheme(1);
-		} else {
-			toggleTheme(0);
-			props.onLoad(true);
-		}
-	}, []);
+	}, [isDark]);
 
 	return (
 		<button
-			onClick={() => toggleTheme()}
-			className={cn("h-8 w-8 rounded-full overflow-hidden text-black dark:text-white")}
+			onClick={() => setTheme(isDark ? "light" : "dark")}
+			className={cn(
+				"h-8 w-8 rounded-full overflow-hidden text-black dark:text-white",
+				props.color
+			)}
 		>
-			<motion.div className="h-full" animate={{ translateY: isDark ? "-100%" : "0%" }}>
+			<motion.div className={cn("h-full")} animate={{ translateY: isDark ? "-100%" : "0%" }}>
 				<div className="h-full flex items-center justify-center">
 					<SunIcon className="h-6 w-6" />
 				</div>
@@ -215,7 +207,7 @@ export const Sidebar = () => {
 									exit={{ opacity: 0 }}
 									className=""
 								>
-									<ThemeButton onLoad={() => {}} />
+									<ThemeButton color="text-white" />
 								</motion.div>
 							</div>
 						)}
