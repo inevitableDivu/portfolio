@@ -156,12 +156,12 @@ export const Sidebar = () => {
 
 	return (
 		<>
-			<div className="relative z-[99] hidden">
+			<div className="relative z-[99]">
 				<motion.div
 					variants={sidebar}
 					custom={{ height, width }}
 					animate={isOpen ? "open" : "closed"}
-					className="absolute bg-theme-purple dark:bg-theme-purple z-[99] rounded-3xl select-none shadow-md"
+					className="absolute bg-theme-purple dark:bg-theme-purple z-0 rounded-3xl select-none shadow-md"
 				>
 					<AnimatePresence>
 						{isOpen && (
