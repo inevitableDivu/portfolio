@@ -9,12 +9,14 @@ export const ABOUT_FORMAT_CONSTANTS: AboutFormatConstantType[] = ["%PROFESSION%"
 
 type FromatTextReturnType = (JSX.Element | string)[];
 
-function formatText<T extends string>(paragraph: string, format_constant_arr: T[] = []): FromatTextReturnType {
+function formatText<T extends string>(
+	paragraph: string,
+	format_constant_arr: T[] = []
+): FromatTextReturnType {
 	let response: FromatTextReturnType = [];
 
 	let jsxEl: (JSX.Element | string)[] = [];
-	const is_plain_para = format_constant_arr.every(item => !paragraph.includes(item));
-	console.log({ is_plain_para })
+	const is_plain_para = format_constant_arr.every((item) => !paragraph.includes(item));
 
 	if (is_plain_para) {
 		response.push(paragraph);
@@ -22,18 +24,22 @@ function formatText<T extends string>(paragraph: string, format_constant_arr: T[
 		format_constant_arr.map((item) => {
 			jsxEl = [];
 			if (paragraph.includes(item)) {
-				let profession: (JSX.Element | string)[] = [];
-				user.profession.forEach((title, index) => {
+				let newText: (JSX.Element | string)[] = [];
+				const key = item.replace(/%/g, "") as AboutFormatConstant;
+				let content = user[key.toLowerCase() as keyof typeof user];
+				if (!Array.isArray(content)) content = [content];
+
+				content.forEach((title, index) => {
 					let isLastIndex = index === user.profession.length - 1;
-					if (isLastIndex) profession.push("and ");
-					profession.push(<Text key={Math.random()}>{title}</Text>);
-					if (!isLastIndex) profession.push(", ");
+					if (isLastIndex) newText.push("and ");
+					newText.push(<Text key={Math.random()}>{title}</Text>);
+					if (!isLastIndex) newText.push(", ");
 				});
-				let updatedPara = paragraph.split("%PROFESSION%");
-				jsxEl = [updatedPara[0], ...profession, ...updatedPara.slice(1)];
+				let updatedPara = paragraph.split(item);
+				jsxEl = [updatedPara[0], ...newText, ...updatedPara.slice(1)];
 			}
 			if (jsxEl) response.push(...jsxEl);
-		})
+		});
 	}
 
 	return response;

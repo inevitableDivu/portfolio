@@ -1,7 +1,6 @@
 import Wrapper from "@/components/animation-wrapper";
 import Heading from "@/components/heading";
 import CustomLink from "@/components/link";
-import SocialButtons from "@/components/social.button";
 import { beamStyle, profile, user } from "@/constants/data";
 import { ABOUT_FORMAT_CONSTANTS, formatText } from "@/lib/markdown";
 import { cn } from "@/lib/utils";
@@ -10,24 +9,29 @@ import { ArrowUp } from "lucide-react";
 function Home() {
 	return (
 		<Wrapper>
-			<Heading>I&apos;m {user.name}</Heading>
+			<div className="text-xl uppercase text-zinc-400 font-medium mt-16">
+				Hey, I&apos;m {user.name}
+			</div>
+			<div className="text-theme-purple text-5xl font-medium mt-6 mb-12">
+				Full Stack Developer
+			</div>
 			<div className="space-y-3 flex flex-col">
 				{Array.isArray(profile.about) ? (
 					profile.about.map((para, index) => (
 						<p
 							key={index}
 							className={cn(
-								"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-10",
+								"dark:font-normal text-2xl leading-relaxed text-gray-700",
 								beamStyle
 							)}
 						>
-							{formatText(para, ABOUT_FORMAT_CONSTANTS)}
+							{para}
 						</p>
 					))
 				) : (
 					<p
 						className={cn(
-							"text-xs dark:font-normal md:text-sm leading-[2.5] md:leading-[2.5] lg:leading-[2.5] tracking-wide z-10",
+							"dark:font-normal text-2xl leading-relaxed text-gray-700",
 							beamStyle
 						)}
 					>
@@ -35,24 +39,22 @@ function Home() {
 					</p>
 				)}
 			</div>
-			<br className="hidden md:block" />
-			<div className="my-3 md:my-5">
-				<div className="flex items-center gap-3">
-					<CustomLink
-						href="/about"
-						underlineClass="origin-left mx-0"
-						className="text-sm dark:text-white"
-					>
-						<span>See more about me</span>{" "}
-					</CustomLink>
-					<span className="rotate-90">
-						<ArrowUp className="h-5 w-5 animate-bounce" />
-					</span>
+			<div className="flex-1 my-16 flex items-center justify-center">
+				<div className="grid grid-cols-3 divide-x-[0.5px] divide-[#0F172A]/20">
+					<div className="px-16 flex flex-col gap-4">
+						<div className="text-4xl font-semibold">15+</div>
+						<div className="text-[#0F172A]/50">Full Stack Projects</div>
+					</div>
+					<div className="px-20 flex flex-col gap-4">
+						<div className="text-4xl font-semibold">3+</div>
+						<div className="text-[#0F172A]/50">Years of Experience</div>
+					</div>
+					<div className="px-20 flex flex-col gap-4">
+						<div className="text-4xl font-semibold">10+</div>
+						<div className="text-[#0F172A]/50">Mobile Apps</div>
+					</div>
 				</div>
 			</div>
-			<br className="hidden md:block" />
-			<br className="hidden md:block" />
-			<SocialButtons />
 		</Wrapper>
 	);
 }

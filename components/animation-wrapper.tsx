@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { curve, text, translate } from "@/lib/animate";
 import { useRouter } from "next/router";
-import { navigation } from "./navbar";
+import { navigation, Routes } from "./navbar";
 
 const anim = (variants: Variants) => {
 	return {
@@ -15,6 +15,16 @@ const anim = (variants: Variants) => {
 };
 
 const CURVE_INDEX = 300;
+
+function getRouteName(route: string) {
+	return (
+		Object.values(navigation).filter((nav) => {
+			const href = nav.mapRouteTo ?? nav.href;
+			if (route === href) return true;
+			return false;
+		})[0].name ?? "Home"
+	);
+}
 
 function Wrapper({ children }: React.PropsWithChildren) {
 	const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
@@ -57,14 +67,12 @@ function Wrapper({ children }: React.PropsWithChildren) {
 	}, [dimensions.height, dimensions.width]);
 
 	return (
-		<div className="max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0">
+		<div className="flex-1 max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-none mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0 text-center">
 			<motion.p
 				className="fixed inset-0 text-white flex items-center justify-center z-[999999] text-xl lg:text-3xl font-semibold"
 				{...anim(text)}
 			>
-				<span className="mx-auto my-auto">
-					{navigation[router.route as keyof typeof navigation].name}
-				</span>
+				<span className="mx-auto my-auto">{getRouteName(router.route)}</span>
 			</motion.p>
 			{dimensions.width < 1 && (
 				<motion.div

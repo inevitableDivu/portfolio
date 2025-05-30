@@ -36,7 +36,7 @@ function CustomLink({
 				<span
 					id="cardHover"
 					className={cn(
-						"text-xs xl:text-sm relative group font-medium text-slate-600 dark:text-slate-300",
+						"text-xs xl:text-sm relative group text-slate-600 dark:text-slate-300",
 						className
 					)}
 				>

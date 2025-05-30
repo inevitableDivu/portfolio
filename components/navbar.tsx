@@ -12,16 +12,33 @@ import CustomLink from "./link";
 import { useRouter } from "next/router";
 import { useTheme } from "./context/theme.provider";
 
-export const navigation = {
-	"/": { name: "Home", href: "/" },
-	"/about": { name: "About", href: "/about" },
-	"/projects": { name: "Projects", href: "/projects" },
-	"/resume": {
+export type Routes = "home" | "about" | "projects" | "resume" | "contact";
+
+export type NavigationType = {
+	[key in Routes]: {
+		hideFromNav: boolean;
+		name: string;
+		href: `/${Routes}`;
+		target?: string;
+		mapRouteTo?: string;
+	};
+};
+
+// export type RoutesType =
+
+export const navigation: NavigationType = {
+	home: { hideFromNav: true, name: "Home", href: "/home", mapRouteTo: "/" },
+	about: { hideFromNav: false, name: "About me", href: "/about" },
+	projects: { hideFromNav: false, name: "My Projects", href: "/projects" },
+	resume: {
+		hideFromNav: false,
 		name: "Resume",
-		href: "https://drive.google.com/file/d/16CrTWivHQH0rWxZTlo_BfVjh4XJXjKsX/view?usp=sharing",
+		href: "/resume",
+		mapRouteTo:
+			"https://drive.google.com/file/d/16CrTWivHQH0rWxZTlo_BfVjh4XJXjKsX/view?usp=sharing",
 		target: "_blank",
 	},
-	"/contact": { name: "Contact", href: "/contact" },
+	contact: { hideFromNav: false, name: "Contact me", href: "/contact" },
 };
 
 type ThemeProp = {
@@ -31,7 +48,7 @@ type ThemeProp = {
 function Navbar() {
 	const pathname = usePathname();
 	return (
-		<nav className="flex items-center justify-between lg:px-5 p-0 sm:pt-6 md:py-10 sm:max-w-xl mx-auto md:max-w-none transition-all duration-150 z-30">
+		<nav className="w-full flex items-center justify-between lg:px-5 p-0 sm:pt-6 md:py-10 sm:max-w-xl mx-auto md:max-w-none transition-all duration-150 z-30">
 			<div className="z-10 flex-shrink-0">
 				<Link href="/" className={pathname === "/" ? "pointer-events-none" : ""}>
 					<Logo className="h-10 w-10 text-black dark:text-white" />
@@ -41,12 +58,14 @@ function Navbar() {
 				<ul className="flex gap-2 items-center" id="cardHover">
 					<AnimatePresence mode="sync" presenceAffectsLayout>
 						{Object.values(navigation).map((nav) =>
-							nav.href !== "/" ? (
+							!nav.hideFromNav ? (
 								<CustomLink
 									key={nav.href}
-									{...nav}
+									href={nav.mapRouteTo || nav.href}
+									target={nav.target}
+									passHref
 									className={cn("px-4 py-3", {
-										hidden: pathname === nav.href,
+										"font-semibold": pathname === nav.href,
 									})}
 								>
 									{nav.name}
@@ -54,8 +73,6 @@ function Navbar() {
 							) : null
 						)}
 					</AnimatePresence>
-
-					<ThemeButton />
 				</ul>
 			</div>
 			<div className="md:hidden">
@@ -66,7 +83,6 @@ function Navbar() {
 }
 
 const ThemeButton = (props: ThemeProp) => {
-	const ref = useRef<boolean>(true);
 	const { theme, setTheme } = useTheme();
 	const isDark = theme === "dark";
 
@@ -84,7 +100,7 @@ const ThemeButton = (props: ThemeProp) => {
 		<button
 			onClick={() => setTheme(isDark ? "light" : "dark")}
 			className={cn(
-				"h-8 w-8 rounded-full overflow-hidden text-black dark:text-white",
+				"h-8 w-8 rounded-full overflow-hidden text-black dark:text-white hidden md:inline",
 				props.color
 			)}
 		>
@@ -143,14 +159,14 @@ export const Sidebar = () => {
 		let container = document.getElementById("content_container");
 		if (container) {
 			if (isOpen) {
-				container.style.overflow = "hidden";
+				container.style.overflowY = "hidden";
 			} else {
-				container.style.overflow = "auto";
+				container.style.overflowY = "auto";
 			}
 		}
 
 		return () => {
-			if (container) container.style.overflow = "auto";
+			if (container) container.style.overflowY = "auto";
 		};
 	}, [isOpen]);
 

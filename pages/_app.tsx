@@ -8,6 +8,7 @@ import { Poppins } from "next/font/google";
 
 import "@/styles/globals.css";
 import ThemeProvider from "@/components/context/theme.provider";
+import Footer from "@/components/footer";
 
 const poppins = Poppins({
 	weight: ["400", "500", "600", "700"],
@@ -27,7 +28,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 			<Background />
 			<div
 				id="content_container"
-				className={cn("p-4 sm:p-5 max-h-full overflow-y-auto overflow-x-hidden h-full", {
+				className={cn("max-h-full overflow-y-auto overflow-x-hidden h-full", {
 					"fixed inset-0 z-10": styles.background === "beam",
 				})}
 			>
@@ -35,7 +36,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
 				<div
 					className={cn(
-						"max-h-full h-full inset-y-0 max-w-6xl mx-auto pb-2",
+						"p-4 sm:p-5 max-h-full h-full inset-y-0 max-w-7xl mx-auto pb-2",
 						poppins.className
 					)}
 				>
@@ -49,6 +50,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
 					>
 						<Component key={router.route} {...pageProps} />
 					</AnimatePresence>
+
+					<Footer />
 				</div>
 			</div>
 		</ThemeProvider>

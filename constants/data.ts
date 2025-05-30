@@ -5,6 +5,7 @@ export const user = {
 	name: "Divyansh Pandey",
 	nameInitials: "dp",
 	profession: ["Full Stack Software Engineer", "Mobile App Developer"],
+	tagline: "Crafting Digital Experiences with a Touch of Creativity",
 };
 
 export const socialNetworks = {
@@ -18,8 +19,8 @@ export const socialNetworks = {
 export const profile = {
 	title: "Your Friendly Neighborhood Digital Craftsman: Building Apps with Beats of Code",
 	about: [
-		`Consider yourself in the presence of your friendly neighborhood digital craftsman – a %PROFESSION% extraordinaire! I wield JavaScript like a digital sculptor, crafting websites and mobile apps that bring your ideas to life in interactive wonderlands.`,
-		`Like my code, my taste in music blends classics with modern beats. This fuels my passion for crafting unique apps and sparking discussions on web & mobile development. While I'm new to writing, I bring enthusiasm to brainstorm sessions and musical discoveries. Let's turn creative ideas into digital symphonies!`,
+		`I’m a digital creator who turns ideas into seamless web and mobile experiences. With a deep love for JavaScript and a passion for interactive design, I bring concepts to life with code that feels as smooth as a favorite track. Inspired by everything from timeless classics to modern beats, my work blends creativity with functionality. Whether it’s building unique applications or diving into conversations about the future of tech, I’m all about crafting thoughtful, engaging digital experiences.`,
+		`Let’s turn great ideas into something extraordinary—one line of code at a time.`,
 	],
 };
 
@@ -31,8 +32,8 @@ type SiteStyle = {
 const backgroundsArr: SiteStyle["background"][] = ["beam", "boxes", "none"];
 
 export const styles: SiteStyle = {
-	background: backgroundsArr[Math.floor(Math.random() * backgroundsArr.length)],
-	cursor: true,
+	background: "beam",
+	cursor: false,
 };
 
 export const beamStyle = {
