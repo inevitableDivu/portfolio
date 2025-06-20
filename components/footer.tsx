@@ -3,7 +3,7 @@ import SocialButtons from "./social.button";
 
 function Footer() {
 	return (
-		<div className="flex items-center justify-center mt-10 pb-10">
+		<div className="flex items-center justify-center sm:mt-10 sm:pb-10">
 			<SocialButtons />
 		</div>
 	);

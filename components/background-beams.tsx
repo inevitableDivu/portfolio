@@ -142,7 +142,7 @@ export default function BackgroundBeams({ className }: { className?: string }) {
 				<div className="h-[36rem] aspect-square bg-green-500 dark:bg-green-400 -left-20 bottom-24 absolute blur-3xl" />
 				<div className="h-[30rem] aspect-square bg-rose-600 dark:bg-rose-400 right-16 md:right-[calc(30vw)] top-[calc(20vh)] absolute blur-3xl" />
 			</div>
-			<div className="absolute bottom-0 md:bottom-5 left-5 text-[12rem] md:text-[16rem] xl:text-[24rem] font-bold text-black/[2%] dark:text-white/[1%] leading-none">
+			<div className="absolute bottom-0 md:bottom-5 left-5 text-[12rem] md:text-[16rem] xl:text-[24rem] font-bold text-black/[2%] dark:text-white/[1%] leading-none select-none">
 				<span className="uppercase font-serif">DP</span>
 			</div>
 		</div>

@@ -4,13 +4,14 @@ import Logo from "@/assets/logo";
 import { useDimensions } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, color, motion, useCycle } from "framer-motion";
-import { MenuIcon, MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import CustomLink from "./link";
 import { useRouter } from "next/router";
 import { useTheme } from "./context/theme.provider";
+import MenuIcon from "@/assets/menu";
 
 export type Routes = "home" | "about" | "projects" | "resume" | "contact";
 
@@ -144,7 +145,7 @@ const sidebar = {
 
 export const Sidebar = () => {
 	const [isOpen, toggleOpen] = useCycle(false, true);
-	const { height, width } = useDimensions();
+	const { width } = useDimensions();
 	const router = useRouter();
 
 	useEffect(() => {
@@ -172,93 +173,41 @@ export const Sidebar = () => {
 
 	return (
 		<>
-			<div className="relative z-[99]">
-				<motion.div
-					variants={sidebar}
-					custom={{ height, width }}
-					animate={isOpen ? "open" : "closed"}
-					className="absolute bg-theme-purple dark:bg-theme-purple z-0 rounded-3xl select-none shadow-md"
+			<div className="relative z-50">
+				<button
+					onClick={() => toggleOpen()}
+					className={
+						"rounded-full h-6 aspect-square text-sm font-semibold uppercase tracking-wider z-[99] select-none relative"
+					}
 				>
-					<AnimatePresence>
-						{isOpen && (
-							<div className="px-10 pt-20 pb-8 flex flex-col gap-8 justify-between h-full">
-								<div className="flex flex-col gap-8 ">
-									{Object.values(navigation).map((nav, index) => (
-										<Link
-											href={nav.href}
-											key={nav.href}
-											style={{
-												perspective: "90px",
-												perspectiveOrigin: "top",
-											}}
-											passHref
-										>
-											<motion.div
-												initial={{ opacity: 0, rotateX: 45 }}
-												animate={{
-													opacity: 1,
-													rotateX: 0,
-													transition: {
-														delay: 0.5 + index * 0.1,
-													},
-												}}
-												exit={{
-													opacity: 0,
-												}}
-												className="text-3xl text-white font-semibold"
-											>
-												{nav.name}
-											</motion.div>
-										</Link>
-									))}
-								</div>
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{
-										opacity: 1,
-										transition: {
-											delay: 0.75,
-										},
-									}}
-									exit={{ opacity: 0 }}
-									className=""
-								>
-									<ThemeButton color="text-white" />
-								</motion.div>
-							</div>
-						)}
-					</AnimatePresence>
-				</motion.div>
-				<MenuToggle toggle={() => toggleOpen()} {...{ isOpen }} />
+					<MenuIcon isOpen={isOpen} />
+				</button>
+
+				<div
+					className={cn(
+						"fixed inset-0 overflow-hidden flex flex-col transition-all visible",
+						{
+							"delay-700 none invisible": !isOpen,
+						}
+					)}
+				>
+					{new Array(4).fill(0).map((_, index) => (
+						<motion.div
+							key={index}
+							animate={{
+								translateX: isOpen ? 0 : -window.innerWidth,
+							}}
+							transition={{
+								type: "tween",
+								delay: index * 0.15,
+							}}
+							className="flex-[0.25] bg-slate-900"
+						></motion.div>
+					))}
+				</div>
 			</div>
 		</>
 	);
 };
-
-export const MenuToggle = ({ toggle, isOpen }: { toggle: () => void; isOpen: boolean }) => (
-	<button
-		onClick={toggle}
-		className="overflow-hidden h-10 rounded-full text-sm font-semibold uppercase tracking-wider z-[99] select-none"
-	>
-		<motion.p
-			animate={{ translateY: isOpen ? "-100%" : "0%" }}
-			transition={{ type: "tween" }}
-			className="h-full flex items-center justify-center px-4 bg-theme-purple dark:bg-slate-100 text-white dark:text-slate-900"
-		>
-			Menu
-		</motion.p>
-		<motion.p
-			animate={{
-				translateY: isOpen ? "-100%" : "0%",
-				rotateX: !isOpen ? 70 : 0,
-				top: !isOpen ? "-50%" : "0%",
-			}}
-			transition={{ type: "tween" }}
-			className="h-full flex items-center justify-center px-4 bg-white dark:bg-slate-900 text-theme-purple dark:text-slate-200"
-		>
-			Close
-		</motion.p>
-	</button>
-);
 
 export default Navbar;

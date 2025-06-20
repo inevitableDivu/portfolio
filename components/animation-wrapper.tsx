@@ -67,7 +67,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 	}, [dimensions.height, dimensions.width]);
 
 	return (
-		<div className="flex-1 max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-none mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0 text-center">
+		<div className="flex-1 max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-5xl xl:max-w-none mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0 text-center">
 			<motion.p
 				className="fixed inset-0 text-white flex items-center justify-center z-[999999] text-xl lg:text-3xl font-semibold"
 				{...anim(text)}
