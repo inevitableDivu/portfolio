@@ -1,8 +1,8 @@
 import Wrapper from "@/components/animation-wrapper";
+import Heading from "@/components/heading";
 import { beamStyle, profile, user } from "@/constants/data";
 import { formatText } from "@/lib/markdown";
 import { cn } from "@/lib/utils";
-import { Heading } from "lucide-react";
 
 const AboutRenderer = (props: { text: React.ReactNode }) => {
 	return (

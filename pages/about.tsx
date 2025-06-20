@@ -7,7 +7,10 @@ import React from "react";
 function About() {
 	return (
 		<Wrapper>
-			<Heading>About Me</Heading>
+			<Heading>Skills</Heading>
+			<Heading>Work Experience</Heading>
+			<Heading>Education</Heading>
+			<Heading>Testimonials</Heading>
 		</Wrapper>
 	);
 }
