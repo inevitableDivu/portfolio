@@ -145,6 +145,7 @@ export const Sidebar = () => {
 						{Object.values(navigation).map((item, index) => {
 							return (
 								<motion.span
+									key={item.href}
 									className="overflow-hidden"
 									animate={{
 										translateY: isOpen ? 0 : 40,
