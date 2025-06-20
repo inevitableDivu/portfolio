@@ -2,6 +2,7 @@ import Wrapper from "@/components/animation-wrapper";
 import { beamStyle, profile, user } from "@/constants/data";
 import { formatText } from "@/lib/markdown";
 import { cn } from "@/lib/utils";
+import { Heading } from "lucide-react";
 
 const AboutRenderer = (props: { text: React.ReactNode }) => {
 	return (
@@ -33,9 +34,7 @@ function Home() {
 			<div className="text-xl uppercase text-zinc-400 font-medium mt-10 sm:mt-16">
 				Hey, I&apos;m {user.name}
 			</div>
-			<div className="text-theme-purple  text-3xl lg:text-5xl font-medium mt-6 mb-12">
-				Full Stack Developer
-			</div>
+			<Heading>Full Stack Developer</Heading>
 			<div className="space-y-3 flex flex-col">
 				{Array.isArray(profile.about) ? (
 					profile.about.map((item, index) => (

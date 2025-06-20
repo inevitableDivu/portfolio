@@ -10,7 +10,7 @@ function Heading({ children, className }: HeadingProps) {
 	return (
 		<h1
 			className={cn(
-				"uppercase font-semibold text-4xl tracking-widest text-slate-900 dark:text-slate-200 mt-8 mb-6",
+				"text-theme-purple text-3xl lg:text-5xl font-medium mt-6 mb-12",
 				beamStyle,
 				className
 			)}
