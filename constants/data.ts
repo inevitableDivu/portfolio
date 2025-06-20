@@ -33,7 +33,7 @@ export const backgroundsArr: SiteStyle["background"][] = ["beam", "boxes", "none
 
 export const styles: SiteStyle = {
 	background: "beam",
-	cursor: false,
+	cursor: true,
 };
 
 export const beamStyle = {

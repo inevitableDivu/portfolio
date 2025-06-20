@@ -1,17 +1,15 @@
 "use client";
 
 import Logo from "@/assets/logo";
+import MenuIcon from "@/assets/menu";
 import { useDimensions } from "@/hooks";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, color, motion, useCycle } from "framer-motion";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
-import CustomLink from "./link";
 import { useRouter } from "next/router";
-import { useTheme } from "./context/theme.provider";
-import MenuIcon from "@/assets/menu";
+import { useEffect } from "react";
+import CustomLink from "./link";
 
 export type Routes = "home" | "about" | "projects" | "resume" | "contact";
 
@@ -24,8 +22,6 @@ export type NavigationType = {
 		mapRouteTo?: string;
 	};
 };
-
-// export type RoutesType =
 
 export const navigation: NavigationType = {
 	home: { hideFromNav: true, name: "Home", href: "/home", mapRouteTo: "/" },
@@ -40,10 +36,6 @@ export const navigation: NavigationType = {
 		target: "_blank",
 	},
 	contact: { hideFromNav: false, name: "Contact me", href: "/contact" },
-};
-
-type ThemeProp = {
-	color?: string;
 };
 
 function Navbar() {
@@ -83,66 +75,6 @@ function Navbar() {
 	);
 }
 
-const ThemeButton = (props: ThemeProp) => {
-	const { theme, setTheme } = useTheme();
-	const isDark = theme === "dark";
-
-	useEffect(() => {
-		if (isDark) {
-			document.documentElement.classList.add("dark");
-			localStorage.theme = "dark";
-		} else {
-			document.documentElement.classList.remove("dark");
-			localStorage.theme = "light";
-		}
-	}, [isDark]);
-
-	return (
-		<button
-			onClick={() => setTheme(isDark ? "light" : "dark")}
-			className={cn(
-				"h-8 w-8 rounded-full overflow-hidden text-black dark:text-white hidden md:inline",
-				props.color
-			)}
-		>
-			<motion.div className={cn("h-full")} animate={{ translateY: isDark ? "-100%" : "0%" }}>
-				<div className="h-full flex items-center justify-center">
-					<SunIcon className="h-6 w-6" />
-				</div>
-				<div className="h-full flex items-center justify-center">
-					<MoonIcon className="h-6 w-6" />
-				</div>
-			</motion.div>
-		</button>
-	);
-};
-
-const sidebar = {
-	open: ({ height, width }: ReturnType<typeof useDimensions>) => ({
-		height: 500,
-		width: width > 576 ? 380 : width - 10,
-		top: -10,
-		right: -10,
-		transition: {
-			duration: 0.5,
-			ease: [0.76, 0, 0.24, 1],
-			type: "tween",
-		},
-	}),
-	closed: {
-		height: 40,
-		width: "100%",
-		right: 0,
-		top: 0,
-		transition: {
-			duration: 0.5,
-			delay: 0.25,
-			ease: [0.76, 0, 0.24, 1],
-			type: "tween",
-		},
-	},
-};
-
 export const Sidebar = () => {
 	const [isOpen, toggleOpen] = useCycle(false, true);
 	const { width } = useDimensions();
@@ -173,7 +105,7 @@ export const Sidebar = () => {
 
 	return (
 		<>
-			<div className="relative z-50">
+			<div className="relative z-50 flex">
 				<button
 					onClick={() => toggleOpen()}
 					className={
@@ -187,9 +119,13 @@ export const Sidebar = () => {
 					className={cn(
 						"fixed inset-0 overflow-hidden flex flex-col transition-all visible",
 						{
-							"delay-700 none invisible": !isOpen,
+							"none invisible": !isOpen,
 						}
 					)}
+					style={{
+						transitionDelay: isOpen ? "0s" : "1.2s",
+						animationDelay: isOpen ? "0s" : "1.2s",
+					}}
 				>
 					{new Array(4).fill(0).map((_, index) => (
 						<motion.div
@@ -199,11 +135,39 @@ export const Sidebar = () => {
 							}}
 							transition={{
 								type: "tween",
-								delay: index * 0.15,
+								delay: index * 0.15 + (!isOpen ? 0.6 : 0),
 							}}
 							className="flex-[0.25] bg-slate-900"
 						></motion.div>
 					))}
+
+					<div className="flex-1 absolute p-5 text-white flex flex-col gap-10">
+						{Object.values(navigation).map((item, index) => {
+							return (
+								<motion.span
+									className="overflow-hidden"
+									animate={{
+										translateY: isOpen ? 0 : 40,
+										opacity: isOpen ? 1 : 0,
+									}}
+									transition={{
+										type: "tween",
+										delay: (!isOpen ? 0 : 0.6) + 0.1 * index,
+									}}
+								>
+									<Link
+										key={item.href}
+										href={item.mapRouteTo || item.href}
+										target={item.target}
+										passHref
+										className="block px-2 py-2 text-3xl font-semibold hover:text-gray-300 transition-colors duration-200"
+									>
+										{item.name}
+									</Link>
+								</motion.span>
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		</>
