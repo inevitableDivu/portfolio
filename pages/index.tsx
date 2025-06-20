@@ -45,7 +45,7 @@ function Home() {
 				)}
 			</div>
 
-			<div className="flex-1 mb-0 my-16 flex items-center justify-center">
+			<div className="flex-1 mb-0 sm:mb-16 my-16 flex items-center justify-center">
 				<div className="grid grid-cols-3 divide-x-[0.5px] divide-[#0F172A]/20">
 					<StatRenderer title={15} description="Full Stack Projects" />
 					<StatRenderer title={3} description="Years of Experience" />
