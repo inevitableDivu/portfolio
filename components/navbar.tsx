@@ -141,7 +141,7 @@ export const Sidebar = () => {
 						></motion.div>
 					))}
 
-					<div className="flex-1 absolute p-5 text-white flex flex-col gap-10">
+					<div className="flex-1 absolute p-5 sm:pt-11 text-white flex flex-col gap-10">
 						{Object.values(navigation).map((item, index) => {
 							return (
 								<motion.span

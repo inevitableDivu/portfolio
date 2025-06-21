@@ -49,7 +49,7 @@ function Home() {
 				<div className="grid grid-cols-3 divide-x-[0.5px] divide-[#0F172A]/20">
 					<StatRenderer title={15} description="Full Stack Projects" />
 					<StatRenderer title={3} description="Years of Experience" />
-					<StatRenderer title={"300K"} description="Lines of code" />
+					<StatRenderer title={"400K"} description="Lines of code" />
 				</div>
 			</div>
 		</Wrapper>
