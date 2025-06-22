@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 import { Variants, motion } from "framer-motion";
-import { curve, text, translate } from "@/lib/animate";
+import { curveFunc, text, translate } from "@/lib/animate";
 import { useRouter } from "next/router";
-import { navigation, Routes } from "./navbar";
+import { navigation } from "./navbar";
+import { useDimensions } from "@/hooks";
 
 const anim = (variants: Variants) => {
 	return {
@@ -26,28 +27,9 @@ function getRouteName(route: string) {
 	);
 }
 
-function Wrapper({ children }: React.PropsWithChildren) {
-	const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
-	const router = useRouter();
-
-	useEffect(() => {
-		const resize = () => {
-			setDimensions({
-				height: window.innerHeight,
-				width: window.innerWidth,
-			});
-		};
-
-		window.addEventListener("resize", resize);
-		resize();
-
-		return () => window.removeEventListener("resize", resize);
-	}, []);
-
-	const paths = useMemo(() => {
-		const { height, width } = dimensions;
-		const curve = width > 768 ? CURVE_INDEX : 150;
-		const initialPath = `
+function getSvgPath(width: number, height: number) {
+	const curve = width > 768 ? CURVE_INDEX : 150;
+	const initialPath = `
 			M0 ${curve}
 			Q${width / 2} 0 ${width} ${curve}
 			L${width} ${height + curve}
@@ -55,7 +37,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			L0 0
 		`;
 
-		const targetPath = `
+	const targetPath = `
 			M0 ${curve}
 			Q${width / 2} 0 ${width} ${curve}
 			L${width} ${height}
@@ -63,8 +45,14 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			L0 0
 		`;
 
-		return { initialPath, targetPath };
-	}, [dimensions.height, dimensions.width]);
+	return { initialPath, targetPath };
+}
+
+function Wrapper({ children }: React.PropsWithChildren) {
+	const { height, width } = useDimensions();
+	const router = useRouter();
+
+	const paths = getSvgPath(width, height);
 
 	return (
 		<div className="flex-1 max-w-2xl sm:max-w-xl md:max-w-2xl lg:max-w-5xl xl:max-w-none mx-auto my-12 md:my-0 flex flex-col z-20 pb-20 sm:pb-0 text-center">
@@ -74,7 +62,7 @@ function Wrapper({ children }: React.PropsWithChildren) {
 			>
 				<span className="mx-auto my-auto">{getRouteName(router.route)}</span>
 			</motion.p>
-			{dimensions.width < 1 && (
+			{width < 1 && (
 				<motion.div
 					id="curve_overlay"
 					initial={{ opacity: 1 }}
@@ -82,20 +70,18 @@ function Wrapper({ children }: React.PropsWithChildren) {
 					className="fixed bg-slate-900 inset-0 z-[999999]"
 				/>
 			)}
-			{dimensions.width > 0 && (
+			{width > 0 && (
 				<motion.svg
-					{...anim(translate(dimensions.width > 768 ? CURVE_INDEX : 150))}
+					{...anim(translate(width > 768 ? CURVE_INDEX : 150))}
 					className="fixed left-0 w-screen pointer-events-none z-[999997] text-slate-900"
 					style={{
-						height: `calc(100vh + ${
-							(dimensions.width > 768 ? CURVE_INDEX : 150) * 2
-						}px)`,
-						top: dimensions.width > 768 ? -CURVE_INDEX : -150,
+						height: `calc(100vh + ${(width > 768 ? CURVE_INDEX : 150) * 2}px)`,
+						top: width > 768 ? -CURVE_INDEX : -150,
 					}}
 				>
 					<motion.path
 						id="curve_svg"
-						{...anim(curve(paths.initialPath, paths.targetPath))}
+						{...anim(curveFunc(paths.initialPath, paths.targetPath))}
 						fill="currentColor"
 					/>
 				</motion.svg>

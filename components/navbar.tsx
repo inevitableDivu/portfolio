@@ -136,8 +136,10 @@ export const Sidebar = () => {
 							transition={{
 								type: "tween",
 								delay: index * 0.15 + (!isOpen ? 0.6 : 0),
+								ease: "linear",
 							}}
 							className="flex-[0.25] bg-slate-900"
+							style={{ willChange: "transform" }}
 						></motion.div>
 					))}
 
@@ -154,7 +156,9 @@ export const Sidebar = () => {
 									transition={{
 										type: "tween",
 										delay: (!isOpen ? 0 : 0.6) + 0.1 * index,
+										ease: "easeInOut",
 									}}
+									style={{ willChange: "transform" }}
 								>
 									<Link
 										key={item.href}
