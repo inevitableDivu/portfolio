@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
+"use client";
 
-import { Variants, motion } from "framer-motion";
+import React from "react";
+
+import { useDimensions } from "@/hooks";
 import { curveFunc, text, translate } from "@/lib/animate";
+import { Variants, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { navigation } from "./navbar";
-import { useDimensions } from "@/hooks";
 
 const anim = (variants: Variants) => {
 	return {
@@ -86,7 +88,6 @@ function Wrapper({ children }: React.PropsWithChildren) {
 					/>
 				</motion.svg>
 			)}
-
 			{children}
 		</div>
 	);
