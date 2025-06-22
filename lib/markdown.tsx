@@ -1,6 +1,8 @@
 import Text from "@/components/text.rich";
 import { user } from "@/constants/data";
 
+import type { JSX } from "react";
+
 type AboutFormatConstant = "PROFESSION" | "TAGLINE";
 
 type AboutFormatConstantType = `%${AboutFormatConstant}%`;
