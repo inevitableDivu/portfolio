@@ -4,17 +4,11 @@ import { background, styles } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
-import { Poppins } from "next/font/google";
 
-import "@/styles/globals.css";
 import ThemeProvider from "@/components/context/theme.provider";
 import Footer from "@/components/footer";
-
-const poppins = Poppins({
-	weight: ["400", "500", "600", "700"],
-	variable: "--font-poppins",
-	subsets: ["latin"],
-});
+import { poppins } from "@/lib/fonts";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps, router }: AppProps) {
 	const Background = background[styles.background];
