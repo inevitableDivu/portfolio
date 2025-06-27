@@ -4,7 +4,6 @@
 /*                            External Dependencies                           */
 /* -------------------------------------------------------------------------- */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { css, styled } from "styled-components";
 
 /* -------------------------- Internal Dependencies ------------------------- */
 import { useIsMounted } from "@/hooks";
