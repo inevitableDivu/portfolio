@@ -8,7 +8,7 @@ const AboutRenderer = (props: { text: React.ReactNode }) => {
 	return (
 		<p
 			className={cn(
-				"dark:font-normal text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed text-gray-700",
+				"dark:font-normal text-base md:text-lg lg:text-xl xl:text-xl leading-relaxed xl:!leading-loose text-gray-800",
 				beamStyle
 			)}
 		>
@@ -34,14 +34,14 @@ function Home() {
 			<div className="text-xl uppercase text-zinc-400 font-medium mt-10 sm:mt-16">
 				Hey, I&apos;m {user.name}
 			</div>
-			<Heading>Full Stack Developer</Heading>
+			<Heading className="font-semibold">Full Stack Developer</Heading>
 			<div className="space-y-3 flex flex-col">
 				{Array.isArray(profile.about) ? (
 					profile.about.map((item, index) => (
 						<AboutRenderer key={index} text={String(item)} />
 					))
 				) : (
-					<AboutRenderer text={formatText(String(profile.about))} />
+					<AboutRenderer text={profile.about} />
 				)}
 			</div>
 
