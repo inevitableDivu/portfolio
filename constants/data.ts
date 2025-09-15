@@ -16,7 +16,12 @@ export const socialNetworks = {
 	twitter: "inevitableDivu7",
 };
 
-export const profile = {
+type ProfileType = {
+	title: string;
+	about: string | string[];
+};
+
+export const profile: ProfileType = {
 	title: "Your Friendly Neighborhood Digital Craftsman: Building Apps with Beats of Code",
 	about: [
 		`I’m a digital creator who turns ideas into seamless web and mobile experiences. With a deep love for JavaScript and a passion for interactive design, I bring concepts to life with code that feels as smooth as a favorite track. Inspired by everything from timeless classics to modern beats, my work blends creativity with functionality. Whether it’s building unique applications or diving into conversations about the future of tech, I’m all about crafting thoughtful, engaging digital experiences.`,

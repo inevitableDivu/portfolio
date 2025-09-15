@@ -8,6 +8,20 @@ function About() {
 		<Wrapper>
 			<Container>
 				<Heading>Skills</Heading>
+
+				<div className="flex text-left">
+					<div className="">
+						<div>Frontend Technologies</div>
+
+						<div className="flex">
+							<span>React</span>
+							<span>NextJs</span>
+							<span>HTML/CSS</span>
+							<span>JavaScript</span>
+							<span>Gatsby</span>
+						</div>
+					</div>
+				</div>
 			</Container>
 			<Container>
 				<Heading>Work Experience</Heading>
