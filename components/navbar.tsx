@@ -32,7 +32,7 @@ export const navigation: NavigationType = {
 		name: "Resume",
 		href: "/resume",
 		mapRouteTo:
-			"https://drive.google.com/file/d/16CrTWivHQH0rWxZTlo_BfVjh4XJXjKsX/view?usp=sharing",
+			"https://drive.google.com/file/d/1fOB8wmbDtF6doxdA1gAslBDCJigtUQj_/view?usp=sharing",
 		target: "_blank",
 	},
 	contact: { hideFromNav: false, name: "Contact me", href: "/contact" },
