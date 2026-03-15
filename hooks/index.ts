@@ -1,2 +1,1 @@
-export * from "./useMounted";
-export * from "./useDimensions";
+export * from "./use-mounted";
