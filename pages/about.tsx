@@ -237,7 +237,7 @@ const ExperienceSection = () => {
       </div>
 
       {/* ── Desktop: split panel ── */}
-      <div className="hidden md:grid grid-cols-[1fr_1fr] gap-8 place-items-center w-full flex-[1_0_70%]">
+      <div className="hidden md:grid grid-cols-[1fr_1fr] gap-8 justify-items-start content-center w-full flex-[1_0_70%]">
         {/* LEFT: Metadata */}
         <div className="relative flex flex-col justify-center">
           <AnimatePresence mode="wait">
