@@ -1,18 +1,13 @@
-import { cn } from "@/lib/utils";
-import { Head, Html, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from "next/document";
 
-export default function DocumentMain() {
-	return (
-		<Html lang="en">
-			<Head />
-			<body
-				className={cn("bg-background antialiased fixed inset-0")}
-				suppressHydrationWarning
-			>
-				<Main />
-
-				<NextScript />
-			</body>
-		</Html>
-	);
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }

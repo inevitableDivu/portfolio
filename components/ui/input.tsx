@@ -1,31 +1,26 @@
-import React from "react";
+import { forwardRef } from "react";
+import { Input as InputPrimitive } from "@base-ui/react/input";
 
-interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
-	id: string;
-	label?: string;
-	onChange: (value: string) => void;
-}
+import { cn } from "@/lib/utils";
 
-const Input: React.FC<InputProps> = ({ id, label, name, placeholder, type, value, onChange }) => {
-	return (
-		<div className="flex flex-col w-full">
-			{label && (
-				<label htmlFor={id} className="text-sm font-semibold text-gray-600">
-					{label}
-				</label>
-			)}
-			<input
-				id={id}
-				name={name}
-				type={type}
-				value={value}
-				placeholder={placeholder}
-				onChange={(event) => onChange(event.target.value)}
-				className="px-4 py-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:border-transparent"
-				style={{ fontSize: "14px", outline: "none" }}
-			/>
-		</div>
-	);
-};
+const Input = forwardRef<
+  HTMLInputElement,
+  React.ComponentProps<typeof InputPrimitive>
+>(({ className, type, ...props }, ref) => {
+  return (
+    <InputPrimitive
+      type={type}
+      data-slot="input"
+      className={cn(
+        "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        className,
+      )}
+      ref={ref}
+      {...props}
+    />
+  );
+});
 
-export default Input;
+Input.displayName = "Input";
+
+export { Input };

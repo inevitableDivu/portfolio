@@ -1,59 +1,98 @@
-import Wrapper from "@/components/animation-wrapper";
-import Heading from "@/components/heading";
-import { beamStyle, profile, user } from "@/constants/data";
-import { formatText } from "@/lib/markdown";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import SocialIcons from "@/components/social.buttons";
+import FullPageSections from "@/components/wrapper/full-page.wrapper";
 
-const AboutRenderer = (props: { text: React.ReactNode }) => {
-	return (
-		<p
-			className={cn(
-				"dark:font-normal text-base md:text-lg lg:text-xl xl:text-xl leading-relaxed xl:!leading-loose text-gray-800",
-				beamStyle
-			)}
-		>
-			{props.text}
-		</p>
-	);
+const stats = [
+  { value: "11+", label: "Projects Delivered" },
+  { value: "4", label: "Years of Experience" },
+  { value: "5+", label: "Global Clients" },
+];
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
-const StatRenderer = (props: { title: number | string; description: string }) => {
-	return (
-		<div className="px-4 md:px-16 flex flex-col gap-4">
-			<div className="text-2xl md:text-4xl font-semibold">{props.title}+</div>
-			<div className="text-[#0F172A]/50 text-xs font-medium md:font-normal md:text-base">
-				{props.description}
-			</div>
-		</div>
-	);
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+  },
 };
 
-function Home() {
-	return (
-		<Wrapper>
-			<div className="text-xl uppercase text-zinc-400 font-medium mt-10 sm:mt-16">
-				Hey, I&apos;m {user.name}
-			</div>
-			<Heading className="font-semibold">Full Stack Developer</Heading>
-			<div className="space-y-3 flex flex-col">
-				{Array.isArray(profile.about) ? (
-					profile.about.map((item, index) => (
-						<AboutRenderer key={index} text={String(item)} />
-					))
-				) : (
-					<AboutRenderer text={profile.about} />
-				)}
-			</div>
+const HomeContent = () => (
+  <motion.div
+    variants={stagger}
+    initial="hidden"
+    animate="visible"
+    className="max-w-6xl text-center space-y-8 px-6"
+  >
+    <div className="space-y-4">
+      <motion.div
+        variants={fadeUp}
+        className="text-sm tracking-widest uppercase text-muted-foreground font-medium"
+      >
+        Hey, I'm Divyansh Pandey
+      </motion.div>
 
-			<div className="flex-1 mb-0 sm:mb-16 my-16 flex items-center justify-center">
-				<div className="grid grid-cols-3 divide-x-[0.5px] divide-[#0F172A]/20">
-					<StatRenderer title={15} description="Full Stack Projects" />
-					<StatRenderer title={3} description="Years of Experience" />
-					<StatRenderer title={"400K"} description="Lines of code" />
-				</div>
-			</div>
-		</Wrapper>
-	);
-}
+      <motion.h1
+        variants={fadeUp}
+        className="font-display text-3xl md:text-5xl font-bold leading-tight text-primary"
+      >
+        Software Engineer & System Designer
+      </motion.h1>
+    </div>
 
-export default Home;
+    <motion.p
+      variants={fadeUp}
+      className="text-muted-foreground leading-relaxed text-base lg:text-lg"
+    >
+      I’m a digital creator who turns ideas into seamless web and mobile
+      experiences. With a deep love for JavaScript and a passion for interactive
+      design, I bring concepts to life with code that feels as smooth as a
+      favorite track. Inspired by everything from timeless classics to modern
+      beats, my work blends creativity with functionality. Whether it’s building
+      unique applications or diving into conversations about the future of tech,
+      I’m all about crafting thoughtful, engaging digital experiences.
+    </motion.p>
+
+    <motion.p
+      variants={fadeUp}
+      className="text-muted-foreground italic text-sm"
+    >
+      Let's turn great ideas into something extraordinary—one line of code at a
+      time.
+    </motion.p>
+
+    <motion.div
+      variants={fadeUp}
+      className="flex items-center justify-center gap-0 pt-4"
+    >
+      {stats.map((stat, idx) => (
+        <div key={stat.label} className="flex items-center">
+          {idx > 0 && <div className="h-10 w-px bg-border mx-8" />}
+          <div className="text-center">
+            <p className="text-3xl font-bold font-display text-foreground">
+              {stat.value}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1 tracking-wide">
+              {stat.label}
+            </p>
+          </div>
+        </div>
+      ))}
+    </motion.div>
+
+    <motion.div variants={fadeUp} className="pt-6">
+      <SocialIcons />
+    </motion.div>
+  </motion.div>
+);
+
+const sections = [{ id: "home", label: "Home", content: <HomeContent /> }];
+
+const Index = () => <FullPageSections sections={sections} />;
+
+export default Index;
