@@ -112,6 +112,27 @@ const FullPageSections = ({ sections }: FullPageSectionsProps) => {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      let target = e.target as HTMLElement | null;
+      let isScrollable = false;
+      while (target && target !== document.body) {
+        if (target.scrollHeight > target.clientHeight) {
+          const style = window.getComputedStyle(target);
+          if (style.overflowY === "auto" || style.overflowY === "scroll") {
+            const isScrollingDown = e.deltaY > 0;
+            const isAtBottom = Math.ceil(target.scrollTop + target.clientHeight) >= target.scrollHeight;
+            const isAtTop = target.scrollTop <= 0;
+            
+            if ((isScrollingDown && !isAtBottom) || (!isScrollingDown && !isAtTop)) {
+              isScrollable = true;
+              break;
+            }
+          }
+        }
+        target = target.parentElement;
+      }
+
+      if (isScrollable) return;
+      
       e.preventDefault();
       if (Math.abs(e.deltaY) < 30) return;
       const dir = e.deltaY > 0 ? 1 : -1;
@@ -126,7 +147,29 @@ const FullPageSections = ({ sections }: FullPageSectionsProps) => {
       touchStartY.current = e.touches[0].clientY;
     };
     const handleTouchEnd = (e: TouchEvent) => {
+      let target = e.target as HTMLElement | null;
+      let isScrollable = false;
       const delta = touchStartY.current - e.changedTouches[0].clientY;
+      const isSwipingUp = delta > 0; // swiping up means scrolling down
+
+      while (target && target !== document.body) {
+        if (target.scrollHeight > target.clientHeight) {
+          const style = window.getComputedStyle(target);
+          if (style.overflowY === "auto" || style.overflowY === "scroll") {
+            const isAtBottom = Math.ceil(target.scrollTop + target.clientHeight) >= target.scrollHeight;
+            const isAtTop = target.scrollTop <= 0;
+            
+            if ((isSwipingUp && !isAtBottom) || (!isSwipingUp && !isAtTop)) {
+              isScrollable = true;
+              break;
+            }
+          }
+        }
+        target = target.parentElement;
+      }
+
+      if (isScrollable) return;
+
       if (Math.abs(delta) < 50) return;
       const dir = delta > 0 ? 1 : -1;
       navigate(activeIndex + dir, dir);
@@ -152,17 +195,19 @@ const FullPageSections = ({ sections }: FullPageSectionsProps) => {
             initial="enter"
             animate="center"
             exit="exit"
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0"
           >
-            <div className="w-full h-full flex items-center justify-center overflow-hidden pt-16">
-              {sections[activeIndex].content}
+            <div className="w-full h-full overflow-y-auto pt-24 pb-12 flex flex-col">
+              <div className="m-auto w-full">
+                {sections[activeIndex].content}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
 
         {/* Dot indicators */}
         {sections.length > 1 && (
-          <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-3">
+          <div className="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-3">
             {sections.map((section, idx) => (
               <button
                 key={section.id}
@@ -176,8 +221,8 @@ const FullPageSections = ({ sections }: FullPageSectionsProps) => {
                 <motion.div
                   className="rounded-full border border-border/60"
                   animate={{
-                    width: idx === activeIndex ? 12 : 8,
-                    height: idx === activeIndex ? 12 : 8,
+                    width: idx === activeIndex ? 10 : 6,
+                    height: idx === activeIndex ? 10 : 6,
                     backgroundColor:
                       idx === activeIndex
                         ? "hsl(var(--primary))"

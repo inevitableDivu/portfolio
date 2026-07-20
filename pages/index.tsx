@@ -32,14 +32,14 @@ const HomeContent = () => (
     <div className="space-y-4">
       <motion.div
         variants={fadeUp}
-        className="text-sm tracking-widest uppercase text-muted-foreground font-medium"
+        className="text-xs md:text-sm tracking-widest uppercase text-muted-foreground font-medium"
       >
         Hey, I'm Divyansh Pandey
       </motion.div>
 
       <motion.h1
         variants={fadeUp}
-        className="font-display text-3xl md:text-5xl font-bold leading-tight text-primary"
+        className="font-display text-2xl md:text-4xl lg:text-5xl font-bold leading-tight text-primary"
       >
         Software Engineer & System Designer
       </motion.h1>
@@ -47,7 +47,7 @@ const HomeContent = () => (
 
     <motion.p
       variants={fadeUp}
-      className="text-muted-foreground leading-relaxed text-base lg:text-lg"
+      className="text-muted-foreground leading-relaxed text-sm md:text-base lg:text-lg"
     >
       I’m a digital creator who turns ideas into seamless web and mobile
       experiences. With a deep love for JavaScript and a passion for interactive
@@ -60,7 +60,7 @@ const HomeContent = () => (
 
     <motion.p
       variants={fadeUp}
-      className="text-muted-foreground italic text-sm"
+      className="text-muted-foreground italic text-xs md:text-sm"
     >
       Let's turn great ideas into something extraordinary—one line of code at a
       time.
@@ -72,12 +72,12 @@ const HomeContent = () => (
     >
       {stats.map((stat, idx) => (
         <div key={stat.label} className="flex items-center">
-          {idx > 0 && <div className="h-10 w-px bg-border mx-8" />}
+          {idx > 0 && <div className="h-10 w-px bg-border mx-4 md:mx-8" />}
           <div className="text-center">
-            <p className="text-3xl font-bold font-display text-foreground">
+            <p className="text-2xl md:text-3xl font-bold font-display text-foreground">
               {stat.value}
             </p>
-            <p className="text-xs text-muted-foreground mt-1 tracking-wide">
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wide">
               {stat.label}
             </p>
           </div>
