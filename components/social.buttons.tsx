@@ -2,8 +2,8 @@ import {
   Github,
   Instagram,
   Linkedin,
-  Twitter,
   Mail,
+  NewTwitterIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
@@ -19,6 +19,11 @@ const socials = [
     icon: Instagram,
     href: "https://instagram.com/code.with.divu",
     label: "Instagram",
+  },
+  {
+    icon: NewTwitterIcon,
+    href: "https://x.com/inevitableDivu7",
+    label: "X",
   },
   { icon: Mail, href: "/contact", label: "Email" },
 ];

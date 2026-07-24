@@ -1,4 +1,3 @@
-import BackgroundBeams from "@/components/beams.background";
 import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui";
 import "@/styles/globals.css";
